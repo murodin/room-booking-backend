@@ -27,14 +27,14 @@ public class UsersController {
     }
 
     @PutMapping()
-    public AngularUser updateUser(@RequestBody AngularUser updatedUser) {
+    public AngularUser updateUser(@RequestBody AngularUser updatedUser) throws InterruptedException {
         User originalUser = userRepository.findById(updatedUser.getId()).get();
         originalUser.setName(updatedUser.getName());
         return new AngularUser(userRepository.save(originalUser));
     }
 
     @PostMapping()
-    public AngularUser newUser(@RequestBody AngularUser user) {
-        return new AngularUser(userRepository.save(user.asUser()));
+    public AngularUser newUser(@RequestBody User user) {
+        return new AngularUser(userRepository.save(user));
     }
 }
