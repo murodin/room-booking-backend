@@ -34,7 +34,7 @@ public class UsersController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable("id") long id) {
+    public void deleteUser(@PathVariable("id") Long id) {
         userRepository.deleteById(id);
     }
 
@@ -43,8 +43,8 @@ public class UsersController {
         return new AngularUser(userRepository.save(user));
     }
 
-    @GetMapping("/resetPassword/{id]")
-    public void resetPassword(@PathVariable("id") long id){
+    @GetMapping("/resetPassword/{id}")
+    public void resetPassword(@PathVariable("id") Long id){
         User user = userRepository.findById(id).get();
         user.setPassword("secret");
         userRepository.save(user);
