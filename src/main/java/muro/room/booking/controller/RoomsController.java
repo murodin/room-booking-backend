@@ -38,4 +38,9 @@ public class RoomsController {
         return roomRepository.save(originalRoom);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteRoom(@PathVariable("id") long id) {
+        roomRepository.deleteById(id);
+    }
+
 }

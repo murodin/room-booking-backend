@@ -37,4 +37,5 @@ public class UsersController {
     public AngularUser newUser(@RequestBody User user) {
         return new AngularUser(userRepository.save(user));
     }
+
 }
