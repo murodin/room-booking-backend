@@ -33,6 +33,12 @@ public class UsersController {
         return new AngularUser(userRepository.save(originalUser));
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") long id) {
+        userRepository.deleteById(id);
+    }
+
+
     @PostMapping()
     public AngularUser newUser(@RequestBody User user) {
         return new AngularUser(userRepository.save(user));
