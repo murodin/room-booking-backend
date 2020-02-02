@@ -38,10 +38,18 @@ public class UsersController {
         userRepository.deleteById(id);
     }
 
-
     @PostMapping()
     public AngularUser newUser(@RequestBody User user) {
         return new AngularUser(userRepository.save(user));
     }
+
+    @GetMapping("/resetPassword/{id]")
+    public void resetPassword(@PathVariable("id") long id){
+        User user = userRepository.findById(id).get();
+        user.setPassword("secret");
+        userRepository.save(user);
+    }
+
+
 
 }
