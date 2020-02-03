@@ -26,4 +26,9 @@ public class BookingsController {
         bookingRepository.deleteById(id);
     }
 
+    @GetMapping()
+    public Booking getBooking(@RequestParam("id") Long id) {
+        return bookingRepository.findById(id).get();
+    }
+
 }
