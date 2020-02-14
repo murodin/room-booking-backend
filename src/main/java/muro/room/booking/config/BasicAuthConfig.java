@@ -22,7 +22,8 @@ public class BasicAuthConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.authorizeRequests()
+        httpSecurity.csrf().disable()
+                .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/api/basicAuth/**").permitAll()
                 .antMatchers("/api/basicAuth/**").hasRole("ADMIN")
                 .and().httpBasic();
