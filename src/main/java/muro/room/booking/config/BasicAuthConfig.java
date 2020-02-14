@@ -15,7 +15,9 @@ public class BasicAuthConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.inMemoryAuthentication()
-                .withUser("muro").password("{noop}123").authorities("ROLE_ADMIN");
+                .withUser("muro").password("{noop}123").authorities("ROLE_ADMIN")
+                .and()
+                .withUser("saniye").password("{noop}123").authorities("ROLE_USER");
         // todo password should be encoded
     }
 
