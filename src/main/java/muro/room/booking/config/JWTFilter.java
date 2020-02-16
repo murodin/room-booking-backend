@@ -3,7 +3,6 @@ package muro.room.booking.config;
 import muro.room.booking.service.JWTService;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Configuration
 public class JWTFilter extends BasicAuthenticationFilter {
 
     private static JWTService jwtService;
