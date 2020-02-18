@@ -32,9 +32,10 @@ public class ValidateUser {
         String token = jwtService.generateToken(name, role);
 
         Map<String, String> result = new HashMap<>();
-        result.put("result", token);
+        result.put("result", "ok");
 
         Cookie cookie = new Cookie("token", token);
+        cookie.setPath("/api");
         response.addCookie(cookie);
 
         return result;

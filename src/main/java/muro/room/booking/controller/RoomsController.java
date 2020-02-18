@@ -5,6 +5,7 @@ import muro.room.booking.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -15,6 +16,8 @@ public class RoomsController {
     private RoomRepository roomRepository;
 
     @GetMapping
+    //public List<Room> getAllRooms(@CookieValue(value="token", defaultValue = "empty") String token, HttpServletResponse response) {
+        //System.out.println("token"+token);
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }
