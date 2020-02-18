@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +23,7 @@ public class ValidateUser {
     private JWTService jwtService;
 
     @GetMapping("/validate")
-    public Map<String, String> userIsValid() {
+    public Map<String, String> userIsValid(HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User userDetails = (User) authentication.getPrincipal();
         String name = userDetails.getUsername();
@@ -31,6 +33,9 @@ public class ValidateUser {
 
         Map<String, String> result = new HashMap<>();
         result.put("result", token);
+
+        Cookie cookie = new Cookie("token", token);
+        response.addCookie(cookie);
 
         return result;
     }
