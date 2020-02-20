@@ -36,6 +36,9 @@ public class ValidateUser {
 
         Cookie cookie = new Cookie("token", token);
         cookie.setPath("/api");
+        cookie.setHttpOnly(true);
+        //todo: when the prod should be true cookie.setSecure(true);
+        cookie.setMaxAge(1800);
         response.addCookie(cookie);
 
         return result;
