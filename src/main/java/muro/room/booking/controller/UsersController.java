@@ -4,9 +4,14 @@ import muro.room.booking.entity.User;
 import muro.room.booking.model.AngularUser;
 import muro.room.booking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -50,5 +55,13 @@ public class UsersController {
         userRepository.save(user);
     }
 
+    @GetMapping("/currentUserRole")
+    public Map<String, String> getCurrentUserRole() {
+        Collection<GrantedAuthority> roles = (Collection<GrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        String role = roles.stream().findAny().orElseGet(() -> null).getAuthority().substring(5);
+        Map<String,String> result = new HashMap<>();
+        result.put("role", role);
+        return result;
+    }
 
 }
