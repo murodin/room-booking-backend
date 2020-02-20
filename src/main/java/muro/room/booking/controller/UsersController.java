@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -58,10 +60,22 @@ public class UsersController {
     @GetMapping("/currentUserRole")
     public Map<String, String> getCurrentUserRole() {
         Collection<GrantedAuthority> roles = (Collection<GrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-        String role = roles.stream().findAny().orElseGet(() -> null).getAuthority().substring(5);
+        String role = roles.stream().findAny().orElse(null).getAuthority().substring(5);
         Map<String,String> result = new HashMap<>();
         result.put("role", role);
         return result;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("token", null);
+        cookie.setPath("/api");
+        cookie.setHttpOnly(true);
+        //todo: when the prod should be true cookie.setSecure(true);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return "";
     }
 
 }
